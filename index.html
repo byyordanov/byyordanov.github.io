@@ -13,40 +13,91 @@
 
 <script type='text/javascript'>
 
-	VF = Vex.Flow;
+function dec2bin(dec){
+    return (dec >>> 0).toString(2);
+}
 
-	// Create an SVG renderer and attach it to the DIV element named "boo".
-	var div = document.getElementById("boo")
-	var renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
+VF = Vex.Flow;
 
-	// Configure the rendering context.
-	renderer.resize(500, 500);
-	var context = renderer.getContext();
-	context.setFont("Arial", 10, "").setBackgroundFillStyle("#eed");
+// Create an SVG renderer and attach it to the DIV element named "boo".
+var div = document.getElementById("boo")
+var renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
 
-	// Create a stave of width 400 at position 10, 40 on the canvas.
-	var stave = new VF.Stave(10, 40, 400);
+// Configure the rendering context.
+renderer.resize(500, 500);
+var context = renderer.getContext();
+context.setFont("Arial", 10, "").setBackgroundFillStyle("#eed");
 
-	// Add a clef and time signature.
-	stave.addClef("treble").addTimeSignature("4/4");
+// Create a stave of width 400 at position 10, 40 on the canvas.
+var stave = new VF.Stave(10, 40, 400);
 
-	// Connect it to the rendering context and draw!
-	stave.setContext(context).draw();
+// Add a clef and time signature.
+stave.addClef("treble").addTimeSignature("4/4");
+
+// Connect it to the rendering context and draw!
+stave.setContext(context).draw();
 
 
-var choices = Array.from({length: 8}, () => Math.floor(Math.random() * 4))
+var choices = Array.from({length: 8}, () => Math.floor(Math.random() * 16))
+
+
+var RH = "g/5"
+var LH = "c/5"
+var RF = "f/4"
+var LF = "d/4"
 
 var notes = 
-	choices.map(function(id) {
-   		if (id == 0) {
-    			return new VF.StaveNote({clef: "treble", keys: ["g/5"], duration: "8" });	
-		} else if (id == 1) {
-    			return new VF.StaveNote({clef: "treble", keys: ["c/5"], duration: "8" });	
-		} else if (id == 3) {
-    			return new VF.StaveNote({clef: "treble", keys: ["c/5","g/5"], duration: "8" });	
-		} else {
-    			return new VF.StaveNote({clef: "treble", keys: ["c/5"], duration: "8r" });	
-		}
+	choices.map(function(id) {				
+   		switch(id) {
+			case 0:
+				return new VF.StaveNote({clef: "treble", keys: [RH], duration: "8" });	
+				break;
+			case 1:									
+    			return new VF.StaveNote({clef: "treble", keys: [LH], duration: "8" });	
+				break;
+			case 2:									
+    			return new VF.StaveNote({clef: "treble", keys: [RF], duration: "8" });	
+				break;
+			case 3:									
+    			return new VF.StaveNote({clef: "treble", keys: [LF], duration: "8" });	
+				break;
+			case 4:									
+    			return new VF.StaveNote({clef: "treble", keys: [RH, LH], duration: "8" });	
+				break;
+			case 5:									
+    			return new VF.StaveNote({clef: "treble", keys: [RH, RF], duration: "8" });	
+				break;
+			case 6:									
+    			return new VF.StaveNote({clef: "treble", keys: [RH, LF], duration: "8" });	
+				break;
+			case 7:									
+    			return new VF.StaveNote({clef: "treble", keys: [LH, RF], duration: "8" });	
+				break;
+			case 8:									
+    			return new VF.StaveNote({clef: "treble", keys: [LH, LF], duration: "8" });	
+				break;
+			case 9:									
+    			return new VF.StaveNote({clef: "treble", keys: [RF, LF], duration: "8" });	
+				break;
+			case 10:									
+    			return new VF.StaveNote({clef: "treble", keys: [RH, LH, RF], duration: "8" });	
+				break;
+			case 11:									
+    			return new VF.StaveNote({clef: "treble", keys: [RH, LH, LF], duration: "8" });	
+				break;
+			case 12:									
+    			return new VF.StaveNote({clef: "treble", keys: [RH, RF, LF], duration: "8" });	
+				break;					
+			case 13:									
+				return new VF.StaveNote({clef: "treble", keys: [LH, RF, LF], duration: "8" });	
+				break;					
+			case 14:									
+    			return new VF.StaveNote({clef: "treble", keys: [RH, LH, RF, LF], duration: "8" });	
+				break;
+			default:									
+    			return new VF.StaveNote({clef: "treble", keys: [RH], duration: "8r" });					
+			}
+		
 	});
 
 
